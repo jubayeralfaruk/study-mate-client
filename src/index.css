@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.text-primary {
+  @apply text-transparent bg-clip-text 
+  bg-gradient-to-r 
+  from-[#2A66F4] to-[#26E3FF];
+}
+
+.active{
+  @apply text-transparent bg-clip-text 
+  bg-gradient-to-r 
+  from-[#2A66F4] to-[#26E3FF];
+}
+
+.primary-btn {
+  @apply bg-gradient-to-r 
+  from-[#2A66F4] to-[#26E3FF] 
+  text-white;
+}
+.primary-btn:hover {
+  opacity: 90%;
+}
+.secondary-btn {
+  @apply border-2 border-[#5793a9] 
+  text-transparent bg-clip-text 
+  bg-gradient-to-r 
+  from-[#2A66F4] to-[#26E3FF] font-bold
+
+  ;
+}
+
+.nav-bar {
+  @apply rounded;
+}
+
+.nav-btn:hover {
+  @apply text-transparent bg-clip-text 
+  bg-gradient-to-r 
+  from-[#2A66F4] to-[#26E3FF]
+
+  /* @apply bg-gradient-to-r 
+  from-[#2A66F4] to-[#26E3FF] 
+  text-white */;
+}
+
+.gradient-border {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 8px;
+  border-image: linear-gradient(to right, #2A66F4, #26E3FF) 1;
+}
