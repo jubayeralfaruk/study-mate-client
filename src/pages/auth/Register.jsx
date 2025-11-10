@@ -2,15 +2,18 @@ import React, { use } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
+import { Link, useNavigate } from "react-router";
 
 const Register = () => {
-  const { singInWithGoogle, register } = use(AuthContext);
+  const {  user, singInWithGoogle, register } = use(AuthContext);
+  const navigate = useNavigate();
 
   const handleSinginWithgoogle = () => {
     singInWithGoogle()
       .then((result) => {
         console.log(result);
-        toast.success(" Continue with Google Successfully");
+        toast.success(" Continue with Google successful!");
+        // navigate("/", { replace: true });
       })
       .catch((err) => {
         const errorMessage = err.message;
@@ -78,8 +81,9 @@ const Register = () => {
           photoURL,
         })
           .then(() => {
-            toast.success("Register Successfully");
-            form.reset()
+            toast.success("Register successful!");
+            // navigate("/", { replace: true });
+            // form.reset();
           })
           .catch((error) => {
             toast.error(error.message);
@@ -90,6 +94,10 @@ const Register = () => {
         toast.error(errorMessage);
       });
   };
+
+  if (user) {
+    navigate(-1);
+  }
 
   return (
     <div>
@@ -180,14 +188,14 @@ const Register = () => {
               <div class="">
                 <p>
                   Don’t have an account?{" "}
-                  <a
+                  <Link
                     class="link link-hover text-red-400"
-                    href="/register"
+                    to="/login"
                     data-discover="true"
                   >
                     {" "}
-                    Register
-                  </a>
+                    Login
+                  </Link>
                 </p>
                 <div class=""></div>
               </div>

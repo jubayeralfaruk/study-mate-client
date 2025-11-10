@@ -8,7 +8,9 @@ const RootLayout = () => {
     <div className=" relative min-h-screen">
       <Navbar></Navbar>
       <div className="max-w-[1240px] mx-auto min-h-[55.3vh]">
-        <Outlet></Outlet>
+        <div className="mx-4">
+          <Outlet></Outlet>
+        </div>
       </div>
       <Footer></Footer>
 

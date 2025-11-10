@@ -1,15 +1,18 @@
-import React, { use } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router";
 
 const Login = () => {
-  const { singInWithGoogle, login } = use(AuthContext);
+  const { user, singInWithGoogle, login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSinginWithgoogle = () => {
     singInWithGoogle()
-      .then((result) => {
-        console.log(result);
-        toast.success("Continue with Google Successfully");
+      .then(() => {
+        // console.log(result);
+        toast.success("Continue with Google successful!");
+        // navigate("/", { replace: true });
       })
       .catch((err) => {
         const errorMessage = err.message;
@@ -33,13 +36,18 @@ const Login = () => {
 
     login(email, password)
       .then(() => {
-        toast.success("Login Successfully");
-        form.reset()
+        toast.success("Login successful!");
+        // navigate(-1, { replace: true });
+        // form.reset();
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
+
+  if (user) {
+    navigate(-1);
+  }
 
   return (
     <div>
@@ -111,14 +119,14 @@ const Login = () => {
               <div class="">
                 <p>
                   Don’t have an account?{" "}
-                  <a
+                  <Link
                     class="link link-hover text-red-400"
-                    href="/register"
+                    to="/register"
                     data-discover="true"
                   >
                     {" "}
                     Register
-                  </a>
+                  </Link>
                 </p>
                 <div class=""></div>
               </div>
