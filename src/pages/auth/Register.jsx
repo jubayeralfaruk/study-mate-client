@@ -1,19 +1,37 @@
-import React, { use } from "react";
+import React, { use, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router";
+import useAxios from "../../hooks/useAxios";
 
 const Register = () => {
-  const {  user, singInWithGoogle, register } = use(AuthContext);
+  const { user, singInWithGoogle, register } = use(AuthContext);
+  const axiosInstance = useAxios();
+  // const location = useLocation();
   const navigate = useNavigate();
+
+  // const from = location.state?.from?.pathName || "/";
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [navigate, user]);
 
   const handleSinginWithgoogle = () => {
     singInWithGoogle()
       .then((result) => {
         console.log(result);
         toast.success(" Continue with Google successful!");
-        // navigate("/", { replace: true });
+
+        const userData = {
+          email: result.user.email,
+          name: result.user.displayName,
+          photoURL: result.user.photoURL,
+        };
+        axiosInstance.post("/users", userData).then(() => {});
+
       })
       .catch((err) => {
         const errorMessage = err.message;
@@ -69,8 +87,6 @@ const Register = () => {
       return;
     }
 
-    // console.log({name, email, photo,password});
-
     register(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -82,11 +98,16 @@ const Register = () => {
         })
           .then(() => {
             toast.success("Register successful!");
-            // navigate("/", { replace: true });
-            // form.reset();
+
+            const userData = {
+              email: email,
+              name: displayName,
+              photoURL: photoURL,
+            };
+            return axiosInstance.post("/users", userData).then(() => {});
           })
           .catch((error) => {
-            toast.error(error.message);
+            console.error(error.message);
           });
       })
       .catch((error) => {
@@ -94,10 +115,6 @@ const Register = () => {
         toast.error(errorMessage);
       });
   };
-
-  if (user) {
-    navigate(-1);
-  }
 
   return (
     <div>

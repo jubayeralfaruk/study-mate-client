@@ -1,10 +1,12 @@
-import React, { use } from "react";
+import React, { use, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, logout } = use(AuthContext);
+
+  const { displayName, photoURL } = user || {};
   
   const handleSingOut = () => {
     logout()
@@ -46,7 +48,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-sm mb-16">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -91,8 +93,8 @@ const Navbar = () => {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt={`user ${user.displayName} profile photo`}
-                  src={user.photoURL}
+                  src={photoURL ? photoURL : "https://i.ibb.co/V0bqcmvx/41-410093-circled-user-icon-user-profile-icon-png.jpg"}
+                  alt={`user ${displayName} profile photo`}
                 />
               </div>
             </div>

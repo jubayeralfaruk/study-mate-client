@@ -1,18 +1,37 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
+import useAxios from "../../hooks/useAxios";
 
 const Login = () => {
   const { user, singInWithGoogle, login } = useContext(AuthContext);
+  const axiosInstance = useAxios()
+  // const location = useLocation();
   const navigate = useNavigate();
+
+  // const from = location.state?.from?.pathName || "/";
+
+  useEffect(()=>{
+    if (user) {
+      navigate('/');
+    }
+  },[user, navigate])
 
   const handleSinginWithgoogle = () => {
     singInWithGoogle()
-      .then(() => {
-        // console.log(result);
+      .then((result) => {
         toast.success("Continue with Google successful!");
-        // navigate("/", { replace: true });
+        console.log(result);
+        
+
+        const userData = {
+          email: result.user.email,
+          name: result.user.displayName,
+          photoURL: result.user.photoURL,
+        }
+        axiosInstance.post("/users", userData)
+          .then(() => {})
       })
       .catch((err) => {
         const errorMessage = err.message;
@@ -37,17 +56,11 @@ const Login = () => {
     login(email, password)
       .then(() => {
         toast.success("Login successful!");
-        // navigate(-1, { replace: true });
-        // form.reset();
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
-
-  if (user) {
-    navigate(-1);
-  }
 
   return (
     <div>

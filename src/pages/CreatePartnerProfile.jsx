@@ -1,72 +1,67 @@
-import { useContext, useState } from "react";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { use } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import useAxios from "../hooks/useAxios";
+import Swal from "sweetalert2";
 
 const CreatePartnerProfile = () => {
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { user } = use(AuthContext);
+  const axiosInstance = useAxios();
 
-  // form state
-  const [formData, setFormData] = useState({
-    name: "",
-    profileImage: "",
-    subject: "",
-    studyMode: "",
-    availabilityTime: "",
-    location: "",
-    experienceLevel: "",
-    rating: 0,
-    partnerCount: 0,
-    email: user?.email || ""
-  });
-
-  // handle change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  // handle submit
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const profileImage = form.profileImage.value;
+    const subject = form.subject.value;
+    const studyMode = form.studyMode.value;
+    const availabilityTime = form.availabilityTime.value;
+    const location = form.location.value;
+    const experienceLevel = form.experienceLevel.value;
+    // const rating = form.rating.value;
+    // const partnerCount = form.partnerCount.value;
 
-    try {
-      const res = await fetch("http://localhost:5000/partners", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+    const newPartners = {
+      name,
+      profileImage,
+      subject,
+      studyMode,
+      availabilityTime,
+      location,
+      experienceLevel,
+      rating: 0,
+      partnerCount: 0,
+      email: user.email
+    };
+
+    axiosInstance
+      .post("/partners", newPartners)
+      .then((data) => {
+        console.log(data.data);
+        if (data.data) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          form.reset()
+        }
       });
-
-      const data = await res.json();
-
-      if (data.insertedId) {
-        toast.success("Profile created successfully!");
-        navigate("/myProfile"); // redirect anywhere you want
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to create profile!");
-    }
   };
-
   return (
     <div className="max-w-xl mx-auto p-6 shadow-md rounded-md">
-      <h2 className="text-2xl font-semibold mb-4">Create Partner Profile</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-center">
+        Create Partner Profile
+      </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-
         <input
           type="text"
           name="name"
           placeholder="Full Name"
           className="input input-bordered w-full"
-          value={formData.name}
-          onChange={handleChange}
+          defaultValue={user?.displayName}
           required
         />
 
@@ -75,8 +70,7 @@ const CreatePartnerProfile = () => {
           name="profileImage"
           placeholder="Profile Image URL"
           className="input input-bordered w-full"
-          value={formData.profileImage}
-          onChange={handleChange}
+          defaultValue={user?.photoURL}
           required
         />
 
@@ -85,16 +79,12 @@ const CreatePartnerProfile = () => {
           name="subject"
           placeholder="Subject (e.g., Math)"
           className="input input-bordered w-full"
-          value={formData.subject}
-          onChange={handleChange}
           required
         />
 
         <select
           name="studyMode"
           className="select select-bordered w-full"
-          value={formData.studyMode}
-          onChange={handleChange}
           required
         >
           <option value="">Select Study Mode</option>
@@ -107,8 +97,6 @@ const CreatePartnerProfile = () => {
           name="availabilityTime"
           placeholder="Availability Time (e.g. Evening 6–9 PM)"
           className="input input-bordered w-full"
-          value={formData.availabilityTime}
-          onChange={handleChange}
           required
         />
 
@@ -117,16 +105,12 @@ const CreatePartnerProfile = () => {
           name="location"
           placeholder="Location (e.g., Dhaka)"
           className="input input-bordered w-full"
-          value={formData.location}
-          onChange={handleChange}
           required
         />
 
         <select
           name="experienceLevel"
           className="select select-bordered w-full"
-          value={formData.experienceLevel}
-          onChange={handleChange}
           required
         >
           <option value="">Select Experience Level</option>
@@ -139,9 +123,8 @@ const CreatePartnerProfile = () => {
           type="number"
           name="rating"
           className="input input-bordered w-full"
-          value={formData.rating}
-          onChange={handleChange}
           min="0"
+          defaultValue={0}
           readOnly
         />
 
@@ -149,7 +132,7 @@ const CreatePartnerProfile = () => {
           type="number"
           name="partnerCount"
           className="input input-bordered w-full"
-          value={formData.partnerCount}
+          defaultValue={0}
           readOnly
         />
 
@@ -158,7 +141,7 @@ const CreatePartnerProfile = () => {
           type="email"
           name="email"
           className="input input-bordered w-full"
-          value={formData.email}
+          defaultValue={user?.email}
           readOnly
         />
 

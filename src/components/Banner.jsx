@@ -4,20 +4,19 @@ const Banner = () => {
   return (
     <div className="w-full mt-10">
       <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden rounded-xl">
-
         {/* === SLIDE CONTAINER === */}
         <div className="w-full h-full carousel-container">
-
           {/* Slide 1 */}
           <div className="slide">
             <img
-              src="https://i.ibb.co/cyN6cp4/learning-1.jpg"
+              src="https://i.ibb.co/r2r2wTYZ/Gemini-Generated-Image-2masyo2masyo2mas.png"
               className="w-full h-full object-cover"
               alt="Slide 1"
             />
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-center">
               <h2 className="text-3xl md:text-5xl font-bold text-white">
-                Your Smart Study Partner — <span className="text-primary">Study Mate</span>
+                Your Smart Study Partner —{" "}
+                <span className="text-primary">Study Mate</span>
               </h2>
             </div>
           </div>
@@ -25,7 +24,7 @@ const Banner = () => {
           {/* Slide 2 */}
           <div className="slide">
             <img
-              src="https://i.ibb.co/ZMD20WZ/learning-3.jpg"
+              src="https://i.ibb.co/C5k0n9LK/back-to-school-still-life-flat-lay-on-yellow-background-with-school-supplies-photo.jpg"
               className="w-full h-full object-cover"
               alt="Slide 2"
             />
@@ -39,7 +38,7 @@ const Banner = () => {
           {/* Slide 3 */}
           <div className="slide">
             <img
-              src="https://i.ibb.co/F4dVNNK/learning-2.jpg"
+              src="https://i.ibb.co/jPwKpXhQ/pexels-cottonbro-4778611.jpg"
               className="w-full h-full object-cover"
               alt="Slide 3"
             />
@@ -52,19 +51,20 @@ const Banner = () => {
           {/* Slide 4 */}
           <div className="slide">
             <img
-              src="https://i.ibb.co/F4dVNNK/learning-2.jpg"
+              src="https://i.ibb.co/21xn1dQ2/homepage-banner.jpg"
               className="w-full h-full object-cover"
               alt="Slide 3"
             />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-center">
-              <h2 className="text-3xl md:text-5xl font-bold text-white">
-                Meet, chat, and study with students from all over the world 🌎
-              </h2>
+            <div className="absolute inset-0 w-full bg-black/40 flex items-center justify-center text-center">
+              {/* <div className="grid grid-cols-8"> */}
+                <h2 className="text-3xl md:text-5xl font-bold text-white">
+                  Meet, chat, and study with students from all over the world 🌎
+                </h2>
+                {/* <p className="col-span-3"></p> */}
+              {/* </div> */}
             </div>
           </div>
-
         </div>
-
       </div>
 
       {/* === CUSTOM CSS FOR AUTOPLAY === */}

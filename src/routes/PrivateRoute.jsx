@@ -1,13 +1,13 @@
-import React from 'react';
-import useAuth from '../hooks/useAuth';
+import React, { use } from 'react';
 import { Navigate } from 'react-router';
+import { AuthContext } from '../contexts/AuthContext';
 
 const PrivateRoute = ({children}) => {
-    const {user, loading} = useAuth;
+    const {user, loading} = use(AuthContext);
 
     if (loading) {
         return <>
-            <div className="m-auto">
+            <div className="flex justify-center items-center min-h-[50vh]">
                 <span className="loading loading-dots loading-xl"></span>
                 <span className="loading loading-dots loading-xl"></span>
                 <span className="loading loading-dots loading-xl"></span>
