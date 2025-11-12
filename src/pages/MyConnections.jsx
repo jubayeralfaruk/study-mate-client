@@ -1,80 +1,203 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router";
-import { toast } from "react-toastify";
+import { useContext, useEffect, useRef, useState } from "react";
+// import { toast } from "react-toastify";
 import { AuthContext } from "../contexts/AuthContext";
 import useAxios from "../hooks/useAxios";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const MyConnections = () => {
   const { user } = useContext(AuthContext);
+  const updateModalRef = useRef();
   const axiosInstance = useAxios();
   const [partners, setPartners] = useState([]);
+  const [selectedPartnerRequest, setSelectedPartnerRequest] = useState(null);
 
   useEffect(() => {
     if (user?.email) {
       axiosInstance
-        .get(`/partners?email=${user.email}`)
+        .get(`/partners-request?senderEmail=${user.email}`)
         .then((res) => setPartners(res.data));
     }
   }, [user, axiosInstance]);
 
-  // handle delete
-  const handleDelete = (id) => {
-    if (!confirm("Do you want to delete this profile?")) return;
+  const handleUpdateModalOpen = (data) => {
+    setSelectedPartnerRequest(data);
+    console.log(data);
 
-    axiosInstance.delete(`/partners/${id}`)
-      .then((res) => {
-        if (res.data.deletedCount > 0) {
-          toast.success("Profile deleted successfully!");
+    updateModalRef.current.showModal();
+  };
+  // handleUpdateRequest
+  const handleUpdateRequest = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const senderName = form.senderName.value;
+    const senderProfileImage = form.senderProfileImage.value;
+    const updateSenderData = {
+      senderName,
+      senderProfileImage,
+    };
 
-          // remove from UI
-          setPartners(partners.filter((p) => p._id !== id));
+    axiosInstance
+      .patch(
+        `/partners-request/${selectedPartnerRequest._id}`,
+        updateSenderData
+      )
+      .then((data) => {
+        if (data.data.upsertedCount) {
+          updateModalRef.current.close();
+          toast.success("Update Successful..!");
         }
+        console.log(data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   };
 
+  // handle delete
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosInstance.delete(`/partners-request/${id}`).then((data) => {
+          if (data.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+
+            const filterRequestData = partners.filter((p) => p._id !== id);
+            setPartners(filterRequestData);
+          }
+        });
+      }
+    });
+  };
+
   return (
-    <div className="max-w-6xl mx-auto py-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">
-        My Connections
-      </h2>
+    <div className="max-w-6xl mx-auto pb-10">
+      <h2 className="text-3xl font-bold mb-6 text-center">My Connections</h2>
 
-      {partners.length === 0 && (
-        <p className="text-center">You haven't created any partner profiles yet.</p>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {partners.map((partner) => (
-          <div key={partner._id} className="p-4 shadow-md rounded-md border">
-
-            <img
-              src={partner.profileImage}
-              alt={partner.name}
-              className="w-full h-56 object-cover rounded-md"
-            />
-
-            <h3 className="text-xl font-bold mt-3">{partner.name}</h3>
-            <p className="text-gray-600">{partner.subject}</p>
-            <p className="text-gray-500">{partner.location}</p>
-
-            <div className="flex justify-between items-center mt-4">
-              <Link
-                to={`/update-partner/${partner._id}`}
-                className="btn btn-primary btn-sm"
-              >
-                Update
-              </Link>
-
-              <button
-                onClick={() => handleDelete(partner._id)}
-                className="btn btn-error btn-sm"
-              >
-                Delete
-              </button>
-            </div>
-
+      {partners.length === 0 ? (
+        <p className="text-center">
+          You haven't created any partner profiles yet.
+        </p>
+      ) : (
+        <div className="">
+          <div className="overflow-x-auto">
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>
+                    <label>#</label>
+                  </th>
+                  <th>Photo</th>
+                  <th>Job</th>
+                  <th>Favorite Color</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 4 */}
+                {partners.map((partnerRequest, index) => (
+                  <tr key={partnerRequest._id}>
+                    <th>{index + 1}</th>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12">
+                            <img
+                              src={partnerRequest.profileImage}
+                              alt={partnerRequest.name}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>Wyman-Ledner</td>
+                    <td>Indigo</td>
+                    <th>
+                      {/* <button className="btn btn-ghost btn-xs">details</button> */}
+                      <button
+                        className="btn btn-primary btn-xs mr-1"
+                        onClick={() => handleUpdateModalOpen(partnerRequest)}
+                      >
+                        Update
+                      </button>
+                      <button
+                        onClick={() => handleDelete(partnerRequest._id)}
+                        className="btn btn-error btn-xs"
+                      >
+                        Delete
+                      </button>
+                    </th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
+      {/* Modal */}
+      <>
+        <dialog
+          ref={updateModalRef}
+          className="modal modal-bottom sm:modal-middle"
+        >
+          <form onSubmit={handleUpdateRequest} className="card-body">
+            <div className="modal-box">
+              <h3 className="font-bold text-lg text-center">
+                Request Connections Update...
+              </h3>
+              {/* Modal bid form */}
+              <fieldset className="fieldset">
+                {/* name */}
+                <label className="label">Buyer Name</label>
+                <input
+                  name="senderName"
+                  type="text"
+                  className="input"
+                  defaultValue={selectedPartnerRequest?.senderName}
+                  required
+                />
+                {/* url */}
+                <label className="label">Buyer Image URL</label>
+                <input
+                  name="senderProfileImage"
+                  type="url"
+                  className="input w-full"
+                  defaultValue={selectedPartnerRequest?.senderProfileImage}
+                  required
+                />
+              </fieldset>
+              <div className="modal-action flex items-center">
+                {/* <button type="submit"></button> */}
+                <input
+                  className="btn primary-btn mt-4"
+                  type="submit"
+                  value="Submit"
+                />
+                <button
+                  type="button"
+                  className="btn mt-4"
+                  onClick={() => updateModalRef.current.close()}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </dialog>
+      </>
     </div>
   );
 };

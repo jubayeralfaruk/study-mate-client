@@ -67,14 +67,16 @@ const PartnerDetails = () => {
   const handleSendRequest = () => {
     const newRequest = {
       partnerId: id,
-      receiverEmail: partner.email,
-      receiverName: partner.name,
-      receiverProfileimage: partner.profileimage,
-      receiverSubject: partner.subject,
-      receiverstudyMode: partner.studyMode,
+      email: partner.email,
+      name: partner.name,
+      profileImage: partner.profileImage,
+      subject: partner.subject,
+      studyMode: partner.studyMode,
+      availabilityTime: partner.availabilityTime,
+      experienceLevel: partner.experienceLevel,
       senderEmail: user.email,
       senderName: user.displayName,
-      senderProfileimage: user.photoURL,
+      senderProfileImage: user.photoURL,
     };
 
     axiosInstance

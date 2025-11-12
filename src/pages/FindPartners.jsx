@@ -7,24 +7,92 @@ const FindPartners = () => {
   const axiosInstance = useAxios();
   const { user } = use(AuthContext);
   const [partners, setPartners] = useState([]);
-//   const [loading, setLoading] = useState(false)
+  const [search, setSearch] = useState("");
+  //   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    axiosInstance.get("/partners").then((data) => {
+    if (!search) {
+        axiosInstance.get("/partners").then((data) => {
       const filterPartner = data.data.filter(
         (partner) => partner?.email !== user?.email
       );
-      setPartners(filterPartner);
+      setPartners(filterPartner); 
     });
-  }, [axiosInstance, setPartners, user]);
+    return;
+    }
+    
+    if (search) {
+        axiosInstance
+            .get(`/partners?subject=${search}`)
+            .then((data) => setPartners(data.data))
+            .catch((err) => console.error(err));
+        }
+  }, [axiosInstance, setPartners, user, search]);
+
+  const handleBySort = (sort) => {
+    axiosInstance
+      .get(`/partners?level=${sort}`)
+      .then((data) => {
+        setPartners(data.data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+  //   const handleForSearch = (search) => {
+
+  //   }
+
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-8 text-center">
-        All Partners
-      </h2>
-
+      <h2 className="text-3xl font-bold mb-8 text-center">All Partners</h2>
+      <div className="flex justify-between mb-10">
+        {/* <h4 className="text-xl">Total Partners: ({partners.length})</h4> */}
+        <div className="">
+          {/* Search */}
+          <label className="input">
+            <svg
+              className="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                strokeWidth="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              type="search"
+              required
+              placeholder="Search"
+            />
+          </label>
+        </div>
+        <div className="">
+          {/* sort */}
+          <select
+            defaultValue="Pick a color"
+            className="select appearance-none"
+            onChange={(e) => handleBySort(e.target.value)}
+          >
+            <option disabled={true}>Sort by Experience</option>
+            <option value="Expert">Expert</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Beginner">Beginner</option>
+          </select>
+        </div>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-        {partners.map((partner,index) => (
+        {partners.map((partner, index) => (
           <Partner key={index} partner={partner}></Partner>
         ))}
       </div>
