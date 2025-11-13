@@ -3,9 +3,6 @@
 ## 🌐 Live Site URL:
 👉 [https://smart-deals-ef2e6.web.app/](https://smart-deals-ef2e6.web.app/)
 
-## 📁 Server Repository:
-👉 [https://github.com/jubayeralfaruk/study-mate-server](https://github.com/jubayeralfaruk/study-mate-server)
-
 ---
 
 ## 📚 Project Overview
