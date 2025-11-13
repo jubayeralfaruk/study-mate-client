@@ -4,7 +4,7 @@ import { Users, Target, BookOpen } from "lucide-react";
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 flex flex-col items-center justify-center px-4 py-16">
+    <div className="min-h-screen rounded-2xl bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 flex flex-col items-center justify-center px-4 py-16">
       {/* Header */}
       <motion.h1
         initial={{ opacity: 0, y: 50 }}

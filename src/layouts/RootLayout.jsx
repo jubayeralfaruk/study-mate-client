@@ -15,7 +15,7 @@ const RootLayout = () => {
       </div>
       <Footer></Footer>
 
-      <div className="">
+      <div className="flex-none relative">
         <ThemeToggle></ThemeToggle>
       </div>
 

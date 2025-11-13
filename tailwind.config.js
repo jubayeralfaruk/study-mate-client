@@ -1,8 +1,20 @@
+// tailwind.config.js
+import daisyui from "daisyui";
+import { themes } from "daisyui/src/theming/themes";
+
 export default {
-  darkMode: "class", // enable class-based dark mode
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [daisyui],
+  daisyui: {
+    themes: [
+      {
+        light: { ...themes["light"] },
+        dark: { ...themes["dark"] },
+      },
+      "cupcake",
+    ],
+  },
 };
