@@ -49,7 +49,7 @@ const PartnerDetails = () => {
         );
 
         // const existingEmail =
-        console.log(user.email, findRequest.senderEmail);
+        // console.log(user.email, findRequest.senderEmail);
 
         if (findRequest && findRequest2) {
           setRequestSent(true);

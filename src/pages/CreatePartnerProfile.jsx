@@ -72,7 +72,6 @@ const CreatePartnerProfile = () => {
           name="name"
           placeholder="Full Name"
           className="input input-bordered w-full"
-          defaultValue={user?.displayName}
           required
         />
 
@@ -81,7 +80,6 @@ const CreatePartnerProfile = () => {
           name="profileImage"
           placeholder="Profile Image URL"
           className="input input-bordered w-full"
-          defaultValue={user?.photoURL}
           required
         />
 
