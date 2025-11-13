@@ -4,11 +4,11 @@ import { Star } from "lucide-react";
 
 const ExtraSections = () => {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16 space-y-20">
+    <div className="mx-auto px-4 md:px-0 pb-16 space-y-20">
       {/* ✅ How It Works Section */}
       <section className="text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-8">
-          How It <span className="text-indigo-600">Works</span>
+          How It <span className="p-0 text-primary">Works</span>
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -45,7 +45,7 @@ const ExtraSections = () => {
       {/* ✅ Testimonials / Review Section */}
       <section className="text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-8">
-          What Our Users <span className="text-indigo-600">Say</span>
+          What Our Users <span className="p-0 text-primary">Say</span>
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">

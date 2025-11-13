@@ -21,7 +21,7 @@ const TopStudyPartners = () => {
   }, [axiosInstance]);
 
   return (
-    <div className="mx-auto my-16">
+    <div className="mx-auto my-20">
       <h2 className="text-3xl font-bold mb-8 text-center">
         Top Study Partners
       </h2>
