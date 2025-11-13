@@ -2,15 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
-import useAxios from "../../hooks/useAxios";
 
 const Login = () => {
   const { user, singInWithGoogle, login } = useContext(AuthContext);
-  const axiosInstance = useAxios()
-  // const location = useLocation();
   const navigate = useNavigate();
-
-  // const from = location.state?.from?.pathName || "/";
 
   useEffect(()=>{
     if (user) {
@@ -20,18 +15,8 @@ const Login = () => {
 
   const handleSinginWithgoogle = () => {
     singInWithGoogle()
-      .then((result) => {
+      .then(() => {
         toast.success("Continue with Google successful!");
-        console.log(result);
-        
-
-        const userData = {
-          email: result.user.email,
-          name: result.user.displayName,
-          photoURL: result.user.photoURL,
-        }
-        axiosInstance.post("/users", userData)
-          .then(() => {})
       })
       .catch((err) => {
         const errorMessage = err.message;

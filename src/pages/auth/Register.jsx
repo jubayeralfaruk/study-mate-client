@@ -3,15 +3,10 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router";
-import useAxios from "../../hooks/useAxios";
 
 const Register = () => {
   const { user, singInWithGoogle, register } = use(AuthContext);
-  const axiosInstance = useAxios();
-  // const location = useLocation();
   const navigate = useNavigate();
-
-  // const from = location.state?.from?.pathName || "/";
 
   useEffect(() => {
     if (user) {
@@ -24,13 +19,6 @@ const Register = () => {
       .then((result) => {
         console.log(result);
         toast.success(" Continue with Google successful!");
-
-        const userData = {
-          email: result.user.email,
-          name: result.user.displayName,
-          photoURL: result.user.photoURL,
-        };
-        axiosInstance.post("/users", userData).then(() => {});
 
       })
       .catch((err) => {
@@ -90,7 +78,6 @@ const Register = () => {
     register(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        // console.log("after login", user);
 
         updateProfile(user, {
           displayName,
@@ -98,13 +85,6 @@ const Register = () => {
         })
           .then(() => {
             toast.success("Register successful!");
-
-            const userData = {
-              email: email,
-              name: displayName,
-              photoURL: photoURL,
-            };
-            return axiosInstance.post("/users", userData).then(() => {});
           })
           .catch((error) => {
             console.error(error.message);
