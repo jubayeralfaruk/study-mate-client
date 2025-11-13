@@ -1,16 +1,62 @@
-# React + Vite
+# 🎓 StudyMate — Find Your Perfect Study Partner (Client Side)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🌐 Live Site URL:
+👉 [https://smart-deals-ef2e6.web.app/](https://smart-deals-ef2e6.web.app/)
 
-Currently, two official plugins are available:
+## 📁 Server Repository:
+👉 [https://github.com/jubayeralfaruk/study-mate-server](https://github.com/jubayeralfaruk/study-mate-server)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📚 Project Overview
+**StudyMate** is a MERN Stack web application that helps students connect and collaborate with study partners.  
+Users can find partners based on subject, experience level, or study mode (online/offline).  
+It aims to make learning more interactive, engaging, and productive.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Key Features
+- 🔐 **Firebase Authentication** (Email & Google Login)
+- 👥 **Find Partners** – Browse and search study partners dynamically
+- 🧩 **Create Partner Profile** – Logged-in users can create their own profile
+- 🔄 **My Connections** – View, update, and delete your partner requests
+- ⭐ **Top Rated Partners** – Home page highlights 3 highest-rated profiles
+- 🌓 **Dark/Light Theme Toggle** – For a personalized experience
+- 📱 **Fully Responsive UI** – Works smoothly on mobile, tablet, and desktop
+- 🚫 **Custom 404 Page** – Beautiful design with “Back to Home” navigation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧠 Technologies Used
+**Frontend:**
+- React.js (Vite)
+- React Router
+- Firebase Authentication
+- Axios (for API calls)
+- React Toastify / SweetAlert2 (for notifications)
+- Tailwind CSS / DaisyUI (for styling)
+
+---
+
+## ⚙️ Functionality Summary
+- Users can **register** or **log in** using Email/Password or Google.
+- Logged-in users can **create study profiles** (with name, subject, rating, etc.).
+- **Find Partners** page displays all partner profiles fetched from MongoDB.
+- **Details Page** (private route) shows full info and allows sending partner requests.
+- **My Connections** allows users to **update** or **delete** their own connections.
+- Data loading shows a **custom spinner**.
+- Supports **search and sort** features for better partner discovery.
+
+---
+
+## 🔗 Routes Overview
+| Route | Description |
+|--------|-------------|
+| `/` | Home Page (with Top Study Partners & Extra Sections) |
+| `/find-partners` | Displays all study partners (search + sort available) |
+| `/create-profile` | Create new study profile (Private Route) |
+| `/my-connections` | Manage sent partner requests (Update/Delete) |
+| `/partner/:id` | Details Page for each partner |
+| `/login` | Login Page |
+| `/register` | Registration Page |
+| `*` | Custom 404 Not Found Page |
