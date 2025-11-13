@@ -12,14 +12,16 @@ const Partner = ({partner}) => {
             alt="user"
             className="w-36 h-36 md:w-44 md:h-44 rounded-full border-4 border-gradient-to-r from-[#632EE3] to-[#9F62F2] object-cover"
           />
-          <div className="bg-green-500 p-1 font-bold text-[12px] top-1 right-1 absolute rounded-full">Top</div>
+          {
+            partner.rating >= 4.45
+          }
         </figure>
         <div className="card-body flex flex-col mt-auto">
           <h2 className="card-title text-[min(5vh,24px)] font-bold text-primary flex justify-between ">
             {partner.name}
             <div className="badge badge-accent">
               <FaStar
-                color="yellow"
+                className="text-yellow-400 fill-yellow-400"
               /> {partner.rating}
             </div>
           </h2>

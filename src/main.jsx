@@ -14,11 +14,12 @@ import { ToastContainer } from 'react-toastify'
 import MyProfile from './pages/MyProfile.jsx'
 import PrivateRoute from './routes/PrivateRoute.jsx'
 import PartnerDetails from './pages/PartnersDetails.jsx'
+import NotFoundPage from './pages/NotFoundPage.jsx'
 
 const router = createBrowserRouter([
   {
     path:"/",
-    Component: RootLayout,
+    element: <PrivateRoute><RootLayout></RootLayout></PrivateRoute>,
     children: [
       {
         index: true,
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
         path: "partners/:id",
         element: <PrivateRoute><PartnerDetails></PartnerDetails></PrivateRoute>,
       },
+      {
+        path: "*",
+        Component: NotFoundPage,
+      }
     ]
   }
 ])

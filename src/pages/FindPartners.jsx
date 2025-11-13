@@ -8,45 +8,48 @@ const FindPartners = () => {
   const { user } = use(AuthContext);
   const [partners, setPartners] = useState([]);
   const [search, setSearch] = useState("");
-  //   const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     if (!search) {
-        axiosInstance.get("/partners").then((data) => {
-      const filterPartner = data.data.filter(
-        (partner) => partner?.email !== user?.email
-      );
-      setPartners(filterPartner); 
-    });
-    return;
+      axiosInstance.get("/partners").then((data) => {
+        const filterPartner = data.data.filter(
+          (partner) => partner?.email !== user?.email
+        );
+        setLoading(false);
+        setPartners(filterPartner);
+      });
+      return;
     }
-    
+
     if (search) {
-        axiosInstance
-            .get(`/partners?subject=${search}`)
-            .then((data) => setPartners(data.data))
-            .catch((err) => console.error(err));
-        }
+      axiosInstance
+        .get(`/partners?subject=${search}`)
+        .then((data) => {
+          setPartners(data.data);
+          setLoading(false);
+        })
+        .catch((err) => console.error(err));
+    }
   }, [axiosInstance, setPartners, user, search]);
 
   const handleBySort = (sort) => {
+    setLoading(true);
     axiosInstance
       .get(`/partners?level=${sort}`)
       .then((data) => {
         setPartners(data.data);
-        console.log(data);
+        setLoading(false);
       })
       .catch((err) => {
         console.error(err);
       });
   };
-  //   const handleForSearch = (search) => {
-
-  //   }
 
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-8 text-center">All Partners</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">Find Partners</h2>
       <div className="flex justify-between mb-10">
         {/* <h4 className="text-xl">Total Partners: ({partners.length})</h4> */}
         <div className="">
@@ -92,9 +95,17 @@ const FindPartners = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-        {partners.map((partner, index) => (
-          <Partner key={index} partner={partner}></Partner>
-        ))}
+        {loading ? (
+            <div className="flex justify-center items-center min-h-[50vh] col-span-full">
+              <span className="loading loading-dots loading-xl"></span>
+              <span className="loading loading-dots loading-xl"></span>
+              <span className="loading loading-dots loading-xl"></span>
+            </div>
+        ) : (
+          partners.map((partner, index) => (
+            <Partner key={index} partner={partner}></Partner>
+          ))
+        )}
       </div>
     </div>
   );

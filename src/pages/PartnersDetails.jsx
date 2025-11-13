@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { ImStarFull } from "react-icons/im";
 import { AuthContext } from "../contexts/AuthContext";
 import useAxios from "../hooks/useAxios";
+import PartnerNotFound from "../components/PartnerNotFound";
 
 const PartnerDetails = () => {
   const { id } = useParams();
@@ -95,7 +96,7 @@ const PartnerDetails = () => {
           ...prev,
           partnerCount: prev.partnerCount + 1,
         }));
-        toast.success("Partner count increased successfully!");
+        // toast.success("Partner count increased successfully!");
       })
       .catch((error) => {
         console.error(error);
@@ -115,7 +116,7 @@ const PartnerDetails = () => {
     );
 
   if (!partner)
-    return <div className="text-center mt-10">Partner not found!</div>;
+    return <PartnerNotFound></PartnerNotFound>
 
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-12 mt-14">

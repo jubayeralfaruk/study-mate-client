@@ -11,19 +11,22 @@ const MyConnections = () => {
   const axiosInstance = useAxios();
   const [partners, setPartners] = useState([]);
   const [selectedPartnerRequest, setSelectedPartnerRequest] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     if (user?.email) {
       axiosInstance
         .get(`/partners-request?senderEmail=${user.email}`)
-        .then((res) => setPartners(res.data));
+        .then((res) => {
+          setPartners(res.data);
+          setLoading(false);
+        });
     }
   }, [user, axiosInstance]);
 
   const handleUpdateModalOpen = (data) => {
     setSelectedPartnerRequest(data);
-    console.log(data);
-
     updateModalRef.current.showModal();
   };
   // handleUpdateRequest
@@ -36,6 +39,7 @@ const MyConnections = () => {
       senderName,
       senderProfileImage,
     };
+    console.log(`/partners-request/${selectedPartnerRequest._id}`);
 
     axiosInstance
       .patch(
@@ -43,10 +47,10 @@ const MyConnections = () => {
         updateSenderData
       )
       .then((data) => {
-        if (data.data.upsertedCount) {
-          updateModalRef.current.close();
+        if (data.data.modifiedCount > 0) {
           toast.success("Update Successful..!");
         }
+        updateModalRef.current.close();
         console.log(data);
       })
       .catch((err) => {
@@ -67,7 +71,7 @@ const MyConnections = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosInstance.delete(`/partners-request/${id}`).then((data) => {
-          if (data.data.modifiedCount > 0) {
+          if (data.data.deletedCount > 0) {
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
@@ -86,7 +90,13 @@ const MyConnections = () => {
     <div className="max-w-6xl mx-auto pb-10">
       <h2 className="text-3xl font-bold mb-6 text-center">My Connections</h2>
 
-      {partners.length === 0 ? (
+      {loading ? (
+        <div className="flex justify-center items-center min-h-[30vh] col-span-full">
+          <span className="loading loading-dots loading-xl"></span>
+          <span className="loading loading-dots loading-xl"></span>
+          <span className="loading loading-dots loading-xl"></span>
+        </div>
+      ) : partners.length === 0 ? (
         <p className="text-center">
           You haven't created any partner profiles yet.
         </p>
