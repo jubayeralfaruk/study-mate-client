@@ -77,7 +77,7 @@ const Navbar = () => {
         </div>
         <Link className="text-2xl font-bold">
           Study
-          <span className="p-0 text-primary -mr-100">Mate</span>
+          <span className="p-0 text-primary">Mate</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">

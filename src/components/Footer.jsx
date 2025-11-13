@@ -15,7 +15,7 @@ const Footer = () => {
             alt="site logo"
             className="w-24 h-24 mx-auto md:mx-0 rounded-full object-cover mb-4"
           />
-          <h2 className="text-2xl font-semibold">Study<span className="p-0 text-primary -mr-100">Mate</span></h2>
+          <h2 className="text-2xl font-semibold">Study<span className="p-0 text-primary ">Mate</span></h2>
           <p className="text-sm mt-2">
             A smart learning platform helping students grow with modern tools 
             and real-time feedback.
