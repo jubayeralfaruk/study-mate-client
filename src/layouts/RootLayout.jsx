@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { Outlet } from "react-router";
 import Footer from "../components/Footer";
+import ThemeToggle from "../components/ThemeToggle";
 
 const RootLayout = () => {
   return (
@@ -13,6 +14,10 @@ const RootLayout = () => {
         </div>
       </div>
       <Footer></Footer>
+
+      <div className="">
+        <ThemeToggle></ThemeToggle>
+      </div>
 
 
       {/* Dark & Light mood */}

@@ -28,6 +28,8 @@ const MyConnections = () => {
 
   const handleUpdateModalOpen = (data) => {
     setSelectedPartnerRequest(data);
+    console.log(data);
+    
     updateModalRef.current.showModal();
   };
   // handleUpdateRequest
@@ -150,7 +152,7 @@ const MyConnections = () => {
                     <td>{partnerRequest.studyMode}</td>
                     <td>{partnerRequest.availabilityTime}</td>
                     {/* <td>{partnerRequest}</td> */}
-                    <th className="space-y-1">
+                    <th className="space-y-1 md:space-y-0">
                       {/* <button className="btn btn-ghost btn-xs">details</button> */}
                       <button
                         className="btn btn-primary btn-xs mr-1"
@@ -185,8 +187,8 @@ const MyConnections = () => {
               </h3>
               {/* Modal bid form */}
               <fieldset className="fieldset">
-                {/* name */}
-                <label className="label">Buyer Name</label>
+                {/* my name */}
+                <label className="label">My Name</label>
                 <input
                   name="senderName"
                   type="text"
@@ -194,8 +196,8 @@ const MyConnections = () => {
                   defaultValue={selectedPartnerRequest?.senderName}
                   required
                 />
-                {/* url */}
-                <label className="label">Buyer Image URL</label>
+                {/* my url */}
+                <label className="label">My Image URL</label>
                 <input
                   name="senderProfileImage"
                   type="url"

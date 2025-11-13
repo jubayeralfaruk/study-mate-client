@@ -15,11 +15,11 @@ const FindPartners = () => {
     setLoading(true);
     if (!search) {
       axiosInstance.get("/partners").then((data) => {
-        const filterPartner = data.data.filter(
-          (partner) => partner?.email !== user?.email
-        );
+        // const filterPartner = data.data.filter(
+        //   (partner) => partner?.email !== user?.email
+        // );
         setLoading(false);
-        setPartners(filterPartner);
+        setPartners(data.data);
       });
       return;
     }

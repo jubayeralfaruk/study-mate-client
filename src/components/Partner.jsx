@@ -1,10 +1,11 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router";
+import { motion } from "framer-motion";
 
 const Partner = ({partner}) => {  
   return (
-    <div className="rounded-4xl">
+    <motion.div whileHover={{ scale: 1.05 }} className="rounded-4xl h-full">
       <div className="card bg-base-100 w-full shadow-2xl flex flex-col h-full">
         <figure className="relative py-10">
           <img
@@ -42,7 +43,7 @@ const Partner = ({partner}) => {
             <Link to={`/partners/${partner._id}`} className="primary-btn btn w-full">View Profile</Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
