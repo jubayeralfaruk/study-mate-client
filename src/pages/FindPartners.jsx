@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../contexts/AuthContext";
 import Partner from "../components/Partner";
+import { motion } from "framer-motion";
 
 const FindPartners = () => {
   const axiosInstance = useAxios();
@@ -49,10 +50,22 @@ const FindPartners = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-8 text-center">Find <span className="p-0 text-primary">Partners</span></h2>
+      <motion.h2
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl md:text-4xl font-bold mb-8 text-center"
+      >
+        Find <span className="p-0 text-primary">Partners</span>
+      </motion.h2>
       <div className="flex justify-between mb-10">
         {/* <h4 className="text-xl">Total Partners: ({partners.length})</h4> */}
-        <div className="">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className=""
+        >
           {/* Search */}
           <label className="input">
             <svg
@@ -79,8 +92,13 @@ const FindPartners = () => {
               placeholder="Search"
             />
           </label>
-        </div>
-        <div className="">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className=""
+        >
           {/* sort */}
           <select
             defaultValue="Pick a color"
@@ -92,18 +110,25 @@ const FindPartners = () => {
             <option value="Intermediate">Intermediate</option>
             <option value="Beginner">Beginner</option>
           </select>
-        </div>
+        </motion.div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {loading ? (
-            <div className="flex justify-center items-center min-h-[50vh] col-span-full">
-              <span className="loading loading-dots loading-xl"></span>
-              <span className="loading loading-dots loading-xl"></span>
-              <span className="loading loading-dots loading-xl"></span>
-            </div>
+          <div className="flex justify-center items-center min-h-[50vh] col-span-full">
+            <span className="loading loading-dots loading-xl"></span>
+            <span className="loading loading-dots loading-xl"></span>
+            <span className="loading loading-dots loading-xl"></span>
+          </div>
         ) : (
           partners.map((partner, index) => (
+            <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
             <Partner key={index} partner={partner}></Partner>
+          </motion.div>
           ))
         )}
       </div>

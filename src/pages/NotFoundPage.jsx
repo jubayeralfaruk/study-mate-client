@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const NotFoundPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-[#2A66F4] to-[#26E3FF] text-white text-center px-6">
+    <div className="rounded-2xl flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-[#2A66F4] to-[#26E3FF] text-white text-center px-6">
       {/* Animated 404 Text */}
       <motion.h1
         initial={{ y: -50, opacity: 0 }}

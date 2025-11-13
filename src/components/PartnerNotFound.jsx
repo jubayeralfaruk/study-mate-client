@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const PartnerNotFound = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] bg-gradient-to-br from-[#2A66F4] to-[#26E3FF]  text-white text-center px-6">
+    <div className="rounded-2xl flex flex-col items-center justify-center min-h-[80vh] bg-gradient-to-br from-[#2A66F4] to-[#26E3FF]  text-white text-center px-6">
       {/* Animated Illustration */}
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
@@ -16,7 +16,7 @@ const PartnerNotFound = () => {
 
       {/* Title */}
       <motion.h1
-        initial={{ y: -20, opacity: 0 }}
+        initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6 }}
         className="text-4xl font-bold mb-3"

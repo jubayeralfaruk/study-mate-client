@@ -22,7 +22,7 @@ const TopStudyPartners = () => {
 
   return (
     <div className="mx-auto my-20">
-      <h2 className="text-3xl font-bold mb-8 text-center">
+      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
         Top Study  <span className="p-0 text-primary">Partners</span>
       </h2>
 

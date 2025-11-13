@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import useAxios from "../hooks/useAxios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const MyConnections = () => {
   const { user } = useContext(AuthContext);
@@ -88,7 +89,13 @@ const MyConnections = () => {
 
   return (
     <div className="max-w-6xl mx-auto pb-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">My <span className="p-0 text-primary">Connections</span></h2>
+      <motion.h2
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl md:text-4xl font-bold mb-6 text-center">
+          My <span className="p-0 text-primary">Connections</span>
+        </motion.h2>
 
       {loading ? (
         <div className="flex justify-center items-center min-h-[30vh] col-span-full">

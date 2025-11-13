@@ -2,6 +2,8 @@ import { use } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import useAxios from "../hooks/useAxios";
 import Swal from "sweetalert2";
+import { motion } from "framer-motion";
+
 
 const CreatePartnerProfile = () => {
   const { user } = use(AuthContext);
@@ -51,11 +53,20 @@ const CreatePartnerProfile = () => {
   };
   return (
     <div className="max-w-xl mx-auto p-6 shadow-md rounded-md">
-      <h2 className="text-3xl font-bold mb-8 text-center">
-        Create Partner <span className="p-0 text-primary">Profile</span>
-      </h2>
+      <motion.h2
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl md:text-4xl font-bold mb-6 text-center">
+          Create Partner  <span className="p-0 text-primary">Profile</span>
+        </motion.h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <motion.form
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 }}
+      
+      onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           name="name"
@@ -145,8 +156,8 @@ const CreatePartnerProfile = () => {
           readOnly
         />
 
-        <button className="btn btn-primary w-full">Create Profile</button>
-      </form>
+        <button className="btn primary-btn w-full">Create Profile</button>
+      </motion.form>
     </div>
   );
 };

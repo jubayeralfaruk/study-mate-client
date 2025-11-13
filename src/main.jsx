@@ -21,7 +21,7 @@ import Contact from './pages/Contact.jsx'
 const router = createBrowserRouter([
   {
     path:"/",
-    element: <PrivateRoute><RootLayout></RootLayout></PrivateRoute>,
+    element: <RootLayout></RootLayout>,
     children: [
       {
         index: true,
