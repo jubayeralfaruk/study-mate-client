@@ -49,7 +49,7 @@ const FindPartners = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-8 text-center">Find Partners</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">Find <span className="p-0 text-primary">Partners</span></h2>
       <div className="flex justify-between mb-10">
         {/* <h4 className="text-xl">Total Partners: ({partners.length})</h4> */}
         <div className="">

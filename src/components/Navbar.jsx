@@ -40,7 +40,7 @@ const Navbar = () => {
       }
 
       <li className="nav-btn">
-        <NavLink to={"/about"}>About</NavLink>
+        <NavLink to={"/about"}>About Us</NavLink>
       </li>
       <li className="nav-btn">
         <NavLink to={"/contact"}>Contact</NavLink>

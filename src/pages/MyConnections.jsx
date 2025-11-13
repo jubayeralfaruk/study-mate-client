@@ -88,7 +88,7 @@ const MyConnections = () => {
 
   return (
     <div className="max-w-6xl mx-auto pb-10">
-      <h2 className="text-3xl font-bold mb-6 text-center">My Connections</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center">My <span className="p-0 text-primary">Connections</span></h2>
 
       {loading ? (
         <div className="flex justify-center items-center min-h-[30vh] col-span-full">

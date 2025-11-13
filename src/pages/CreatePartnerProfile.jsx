@@ -51,8 +51,8 @@ const CreatePartnerProfile = () => {
   };
   return (
     <div className="max-w-xl mx-auto p-6 shadow-md rounded-md">
-      <h2 className="text-2xl font-semibold mb-4 text-center">
-        Create Partner Profile
+      <h2 className="text-3xl font-bold mb-8 text-center">
+        Create Partner <span className="p-0 text-primary">Profile</span>
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">

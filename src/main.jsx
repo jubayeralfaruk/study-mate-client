@@ -15,6 +15,8 @@ import MyProfile from './pages/MyProfile.jsx'
 import PrivateRoute from './routes/PrivateRoute.jsx'
 import PartnerDetails from './pages/PartnersDetails.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
+import AboutUs from './pages/AboutUs.jsx'
+import Contact from './pages/Contact.jsx'
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
       {
         path: "partners/:id",
         element: <PrivateRoute><PartnerDetails></PartnerDetails></PrivateRoute>,
+      },
+      {
+        path:"about",
+        Component: AboutUs
+      },
+      {
+        path: "contact",
+        Component: Contact
       },
       {
         path: "*",

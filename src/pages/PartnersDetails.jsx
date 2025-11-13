@@ -189,8 +189,8 @@ const PartnerDetails = () => {
           </div>
         ) : (
           <div className="">
-            <h3 className="text-2xl font-medium mb-3 underline text-center">
-              Connections
+            <h3 className="text-2xl font-medium mb-3 text-center">
+              <span className="p-0 text-primary">Connections</span>
             </h3>
             <div className="overflow-x-auto">
               <table className="table">
