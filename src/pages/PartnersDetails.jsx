@@ -84,10 +84,10 @@ const PartnerDetails = () => {
       .post(`/partners-request`, newRequest)
       .then((data) => {
         // if (data.data.insertedId) {
-          toast.success("Request sended Successful..!");
-          setRequestSent(true);
-          newRequest._id = data.data.insertedId;
-          setConnectionsPartner([...connectionsPartner, newRequest]);
+        toast.success("Request sended Successful..!");
+        setRequestSent(true);
+        newRequest._id = data.data.insertedId;
+        setConnectionsPartner([...connectionsPartner, newRequest]);
         // }
         return axiosInstance.patch(`/partners/${id}/increase`);
       })
@@ -115,8 +115,7 @@ const PartnerDetails = () => {
       </div>
     );
 
-  if (!partner)
-    return <PartnerNotFound></PartnerNotFound>
+  if (!partner) return <PartnerNotFound></PartnerNotFound>;
 
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-12 mt-14">
@@ -155,7 +154,10 @@ const PartnerDetails = () => {
               <small>Experience:</small> Medium {partner.studyMode}
             </span>
             <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">
-              <small>Partner Connections :</small> {partner.partnerCount === 0 || partner.partnerCount === undefined ? 0 : partner.partnerCount}
+              <small>Partner Connections :</small>{" "}
+              {partner.partnerCount === 0 || partner.partnerCount === undefined
+                ? 0
+                : partner.partnerCount}
             </span>
           </div>
 
@@ -179,54 +181,51 @@ const PartnerDetails = () => {
         </div>
       </div>
       <div className="">
-        {
-            connectionsPartner.length === 0 ?
-            <div className="border py-10 border-gray-500 rounded-xl">
+        {connectionsPartner.length === 0 ? (
+          <div className="border py-10 border-gray-500 rounded-xl">
             <p className="text-xl text-center text-gray-500">
-                Partner Connections Empty
+              Partner Connections Empty
             </p>
-            </div>
-            :
-            <div className="">
+          </div>
+        ) : (
+          <div className="">
             <h3 className="text-2xl font-medium mb-3 underline text-center">
-                Connections
+              Connections
             </h3>
-            {connectionsPartner?.map((connection, index) => (
-                <div key={connection._id} className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
+            <div className="overflow-x-auto">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                {connectionsPartner?.map((connection, index) => (
+                  <tbody key={connection._id}>
                     <tr>
-                        <th>#</th>
-                        <th>Photo</th>
-                        <th>Name</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {/* row 1 */}
-                    <tr>
-                        <th>{index + 1}</th>
-                        <td>
+                      <th>{index + 1}</th>
+                      <td>
                         <div className="flex items-center gap-3">
-                            <div className="avatar">
+                          <div className="avatar">
                             <div className="mask mask-squircle h-12 w-12">
-                                <img
-                                src={connection?.senderProfileimage}
+                              <img
+                                src={connection?.senderProfileImage}
                                 alt={connection?.senderName}
-                                />
+                              />
                             </div>
-                            </div>
+                          </div>
                         </div>
-                        </td>
-                        <td>{connection?.senderName}</td>
+                      </td>
+                      <td>{connection?.senderName}</td>
                     </tr>
-                    </tbody>
-                </table>
-                </div>
-            ))}
+                  </tbody>
+                ))}
+              </table>
             </div>
-        }
+          </div>
+        )}
       </div>
     </div>
   );

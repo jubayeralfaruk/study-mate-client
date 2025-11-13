@@ -111,8 +111,12 @@ const MyConnections = () => {
                     <label>#</label>
                   </th>
                   <th>Photo</th>
-                  <th>Job</th>
-                  <th>Favorite Color</th>
+                  <th>Name</th>
+                  <th>Subject</th>
+                  <th>Level</th>
+                  <th>Study Mode </th>
+                  <th>Availability Time</th>
+                  {/* <th>Favorite Color</th> */}
                   <th></th>
                 </tr>
               </thead>
@@ -133,9 +137,13 @@ const MyConnections = () => {
                         </div>
                       </div>
                     </td>
-                    <td>Wyman-Ledner</td>
-                    <td>Indigo</td>
-                    <th>
+                    <td>{partnerRequest.name}</td>
+                    <td>{partnerRequest.subject}</td>
+                    <td>{partnerRequest.experienceLevel}</td>
+                    <td>{partnerRequest.studyMode}</td>
+                    <td>{partnerRequest.availabilityTime}</td>
+                    {/* <td>{partnerRequest}</td> */}
+                    <th className="space-y-1">
                       {/* <button className="btn btn-ghost btn-xs">details</button> */}
                       <button
                         className="btn btn-primary btn-xs mr-1"
