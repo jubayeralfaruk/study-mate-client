@@ -3,6 +3,8 @@
 ## 🌐 Live Site URL:
 👉 [https://smart-deals-ef2e6.web.app/](https://smart-deals-ef2e6.web.app/)
 
+## Server git
+[https://github.com/jubayeralfaruk/study-mate-server](https://github.com/jubayeralfaruk/study-mate-server)
 ---
 
 ## 📚 Project Overview
@@ -57,3 +59,25 @@ It aims to make learning more interactive, engaging, and productive.
 | `/login` | Login Page |
 | `/register` | Registration Page |
 | `*` | Custom 404 Not Found Page |
+
+---
+
+## 📦 How to Run Locally
+1. Clone repo  
+2. Install packages:
+   ```
+   npm install
+   ```
+3. Create .env file:
+   ```
+   VITE_APIKEY=
+   VITE_AUTHDOMAIN=
+   VITE_PROJECTID=
+   VITE_STORAGEBUCKET=
+   VITE_MESSAGINGSENDERID=
+   VITE_APPID=
+   ```
+4. Run project:
+   ```
+   npm run dev
+   ```
