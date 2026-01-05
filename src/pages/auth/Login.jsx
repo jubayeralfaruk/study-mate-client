@@ -76,6 +76,33 @@ const Login = () => {
                   <button className="btn btn-neutral mt-4 primary-btn">
                     Login
                   </button>
+                  
+                  {/* Demo Login Button */}
+                  <button 
+                    type="button"
+                    className="btn btn-outline mt-2 w-full"
+                    onClick={() => {
+                      // Auto-fill demo credentials
+                      const form = document.querySelector('form');
+                      form.email.value = 'jubayer@gmail.com';
+                      form.password.value = '123aA/';
+                    }}
+                  >
+                    🎯 Demo User Login (Auto-fill)
+                  </button>
+                  {/* Demo Admin Login Button */}
+                  <button 
+                    type="button"
+                    className="btn btn-outline mt-2 w-full"
+                    onClick={() => {
+                      // Auto-fill demo credentials
+                      const form = document.querySelector('form');
+                      form.email.value = 'jubayeralfaruk@gmail.com';
+                      form.password.value = '123aA/';
+                    }}
+                  >
+                    🎯 Demo Admin Login (Auto-fill)
+                  </button>
                 </fieldset>
               </form>
               <div className="">

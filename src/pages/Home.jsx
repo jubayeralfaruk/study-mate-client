@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const Home = () => {
   return (
-    <div className="space-y-16">
+    <div className="space-y-1">
       {/* Banner Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}

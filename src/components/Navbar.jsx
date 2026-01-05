@@ -31,11 +31,14 @@ const Navbar = () => {
         user && 
         <>
             <li className="nav-btn">
+                <NavLink to={"/dashboard"}>Dashboard</NavLink>
+            </li>
+            {/* <li className="nav-btn">
                 <NavLink to={"/createPartnerProfile"}>Create Partner Profile</NavLink>
             </li>
             <li className="nav-btn">
                 <NavLink to={"/myConnections"}>My Connections</NavLink>
-            </li>
+            </li> */}
         </>
       }
 
@@ -45,10 +48,13 @@ const Navbar = () => {
       <li className="nav-btn">
         <NavLink to={"/contact"}>Contact</NavLink>
       </li>
+      <li className="nav-btn">
+        <NavLink to={"/blog"}>Blog</NavLink>
+      </li>
     </>
   );
   return (
-    <div className="navbar bg-base-100 shadow-sm mb-16">
+    <div className="navbar bg-base-100 shadow-sm mb-4">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -103,6 +109,11 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
+                <Link to={'/dashboard'} className="justify-between">
+                  Dashboard
+                </Link>
+              </li>
+              <li>
                 <Link to={'/myProfile'} className="justify-between">
                   Profile
                 </Link>
@@ -114,7 +125,7 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <Link to={"/login"} className="btn secondary-btn gradient-border font-semibold ">
+            <Link to={"/login"} className="btn secondary-btn gradient-border font-semibold">
               Login
             </Link>
             <Link to={"/register"} className="btn primary-btn">
