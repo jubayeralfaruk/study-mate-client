@@ -20,9 +20,15 @@ const AdminProvider = ({ children }) => {
     if (user?.email) {
       // Check if user is admin
       const isAdmin = adminEmails.includes(user.email);
-      setUserRole(isAdmin ? "admin" : "user");
+      const newRole = isAdmin ? "admin" : "user";
+      setUserRole(newRole);
+      
+      // Store role in localStorage for persistence
+      localStorage.setItem('user-role', newRole);
     } else {
+      // User logged out, reset to default
       setUserRole("user");
+      localStorage.removeItem('user-role');
     }
     setLoading(false);
   }, [user]);
